@@ -13,10 +13,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Habilita o desugaring para bibliotecas Java 8+
+        isCoreLibraryDesugaringEnabled = true 
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
@@ -40,8 +45,11 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:2.0.3" // Adicione esta linha
-    implementation = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Atualize de 2.0.3 para 2.1.4
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    
+    // Se o $kotlin_version der erro, você pode usar a versão direta
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 }
 
 flutter {
