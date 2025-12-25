@@ -338,14 +338,20 @@ class _CalendarioTreinoState extends State<CalendarioTreino> {
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
             ElevatedButton(
-              onPressed: () => _processarAgendamentoSemanal(
-                _nomeController.text,
-                horaSelecionada!,
-                diasSelecionados,
-                int.tryParse(_antecedenciaController.text) ?? 15,
-                _notasController.text, // Agora o código vai reconhecer este 5º argumento
-                corSelecionada,
-              ),
+              onPressed: () {
+                // 1. Primeiro processa os dados
+                _processarAgendamentoSemanal(
+                  _nomeController.text,
+                  horaSelecionada!,
+                  diasSelecionados,
+                  int.tryParse(_antecedenciaController.text) ?? 15,
+                  _notasController.text,
+                  corSelecionada,
+                );
+
+                // 2. Fecha o diálogo explicitamente usando o contexto do Builder
+                Navigator.of(context).pop();
+              },
               child: const Text('Confirmar Semana'),
             ),
           ],
@@ -526,7 +532,7 @@ class _CalendarioTreinoState extends State<CalendarioTreino> {
     }
 
     _salvarDados();
-    Navigator.pop(context);
+    //Navigator.pop(context);
   }
 
   void _copiarAgendaSemanaPassada() async {
