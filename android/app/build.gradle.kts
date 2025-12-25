@@ -39,6 +39,11 @@ android {
     }
 }
 
+dependencies {
+    coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:2.0.3" // Adicione esta linha
+    implementation = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
 flutter {
     source = "../.."
 }
